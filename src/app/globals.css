@@ -2,11 +2,14 @@
 
 :root {
   --background: #ffffff;
+  --midground: #00000099;
   --foreground: #171717;
+
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-midground: var(--midground);
   --color-foreground: var(--foreground);
 }
 
@@ -14,6 +17,34 @@
   :root {
     --background: #ffffff;
     --foreground: #171717;
+  }
+}
+
+@theme {
+  --animate-dropdown-in: dropdown-in 0.5s ease-in-out forwards;
+  --animate-dropdown-exit: dropdown-exit 1s ease-in-out forwards;
+  --animate-dropdown-in-late: dropdown-in 1s ease-in-out forwards;
+  --animate-dropdown-exit-late: dropdown-exit 0.5s ease-in-out forwards;
+
+  @keyframes dropdown-in {
+    0% {
+      height: 0%;
+    }
+
+    100% {
+      height: 100%;
+    }
+  }
+
+
+  @keyframes dropdown-exit {
+    0% {
+      height: 100%;
+    }
+
+    100% {
+      height: 0%;
+    }
   }
 }
 
