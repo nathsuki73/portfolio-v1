@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Bodoni_Moda } from 'next/font/google'
+
+const bodoni_Moda = Bodoni_Moda({
+  subsets: ['latin'],
+})
 
 export const metadata: Metadata = {
   title: "Tan",
@@ -13,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased`}>{children}</body>
+      <body className={`antialiased ${bodoni_Moda.className}`}>{children}</body>
     </html>
   );
 }
