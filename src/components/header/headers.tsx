@@ -3,7 +3,6 @@
 import Link from "next/link";
 import HamburgerButton from "./hamburger-button";
 import { useCallback, useState } from "react";
-import React from "react";
 
 
 const Header = () => {
@@ -16,7 +15,7 @@ const Header = () => {
 
 
   return (
-    <header className={`flex flex-col transition-colors ${isOpen ? 'text-background':'text-foreground'} gap-20`}>
+    <header className={`fixed left-0 top-0 w-full h-full flex flex-col transition-colors ${isOpen ? 'text-background':'text-foreground'} gap-20 z-20`}>
       <div className={`absolute w-full h-full  transition-all ease-in-out ${isOpen ? 'translate-y-0 duration-700 opacity-100': '-translate-y-full  duration-1000 opacity-0'} bg-midground z-0 overflow-hidden`}>
         <div className={`absolute w-full h-full sm:left-3/4 lg:left-8/12 ${isOpen ? 'translate-y-0 duration-1000': '-translate-y-full duration-700'}  bg-foreground transition-all  ease-in-out`}></div>
       </div>
