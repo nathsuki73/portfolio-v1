@@ -2,14 +2,16 @@
 
 :root {
   --background: #efece6;
-  --midground: #00000099;
+  --midground-black: #00000099;
+  --midground-white: #ffffff99;
   --foreground: #171717;
 
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-midground: var(--midground);
+  --color-midground-black: var(--midground-black);
+  --color-midground-white: var(--midground-white);
   --color-foreground: var(--foreground);
   --font-welcome: var(--font-welcome);
 }
