@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Header from "@/components/header/headers";
 import { Bodoni_Moda } from 'next/font/google'
 import localFont from 'next/font/local'
 
@@ -24,7 +25,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased ${bodoni_Moda.className} ${welcome_Web.variable}`}>{children}</body>
+      <body className={`antialiased ${bodoni_Moda.className} ${welcome_Web.variable}`}>
+        <Header />
+        {children}
+        </body>
     </html>
   );
 }

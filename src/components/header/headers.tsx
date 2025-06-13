@@ -1,51 +1,96 @@
 'use client'
 
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link";
 import HamburgerButton from "./hamburger-button";
-import { useCallback, useEffect, useState } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+const Header: React.FC = () => {
 
+  const MenuLinks = [
+    {path: '#home', label: 'Home'},
+    {path: '#about', label: 'About'},
+    {path: '#skills', label: 'Skills'},
+    {path: '#contact', label: 'Contact'},
+  ]
+  
+  const [isOpen, setOpen] = useState(false);
 
-const Header = () => {
-    const [isOpen, setOpen] = useState(false);
-    const [isVisible, setVisible] = useState(false);
+  const container = useRef<HTMLDivElement>(null);
+  const tl = useRef<gsap.core.Timeline | null>(null);
 
-    const handleChange = useCallback((value: boolean) => {
-      setOpen(value);
-    }, []);
+  const toggleMenu = (value: boolean) => {
+    setOpen(value);
+  };
 
-    useEffect(()=> {
-      if (isOpen) {
-        setVisible(true)
-      } else {
-        const timeout = setTimeout(() => {
-          setVisible(false)
-        }, 1000);
-        return () => clearTimeout(timeout)
-      }
-    }, [isOpen])
+  useGSAP(() => {
+    gsap.set(".item-holder", {y: 100})
+
+    tl.current = gsap
+    .timeline({paused: true})
+    .to(".menu-overlay", {
+      duration: 1.25,
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      ease: "power2.inOut"
+    })
+    .to(".item-holder", {
+      y: 0,
+      duration: 1.25,
+      stagger: 0.1,
+      ease: "power4.inOut",
+      delay: -0.75
+    })
+  }, {scope: container})
+
+  useEffect(() => {
+    if (isOpen) {
+      tl.current?.play();
+    } else {
+      tl.current?.reverse();
+    }
+  }, [isOpen])
 
   return (
-    <header className={`fixed left-0 top-0 w-full flex flex-col transition-colors ${isOpen ? 'text-background h-full':'text-foreground h-[72px]'}`}>
-      <div className="flex flex-row justify-between z-10 m-4">
-        <h1 className="m-4 text-2xl font-welcome">NS</h1>
-        <HamburgerButton onChange={handleChange}/>
+    <div className="menu-container" ref={container}>
+      <div className="fixed left-0 top-0 w-full p-4 flex justify-between items-center z-10">
+        <div className={`menu-logo transition-all ease-in-out ${isOpen ? "text-background":"text-foreground"}`}>
+          <Link href="/">TAN</Link>
+        </div>
+        <div>
+          <HamburgerButton onChange={toggleMenu}/>
+        </div>
       </div>
-
-      {isVisible && (<div className={`absolute  left-0 ${isOpen ?'top-0':'-top-full'} w-screen h-screen`}>
-      <div className={`absolute w-full h-full  transition-all ease-in-out ${isOpen ? 'translate-y-0 duration-700 opacity-100': '-translate-y-full  duration-1000 opacity-0'} bg-midground-black z-0 overflow-hidden`}>
-        <div className={`absolute w-full h-full sm:left-3/4 lg:left-8/12 ${isOpen ? 'translate-y-0 duration-1000': '-translate-y-full duration-700'}  bg-foreground transition-all  ease-in-out`}></div>
+      <div className="menu-overlay fixed top-0 left-0 w-screen h-screen p-8 bg-foreground " style={{clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)'}}>
+        <div className="flex flex-col w-full h-full justify-between">
+          <div className="flex flex-col h-3/4 justify-center items-end gap-6">
+            {MenuLinks.map((link, index) => (
+              <div className="menu-link-item overflow-hidden" key={index}>
+                <div className="item-holder">
+                  <Link className="text-7xl text-background" href={link.path}>
+                  {link.label}
+                  </Link>
+                </div>
+              </div>
+              ))}
+          </div>
+          <div className="flex flex-row justify-between font-welcome ">
+            <div className="flex flex-col justify-end text-background text-start">
+              <p>naths@gmail.com</p>
+              <p>123 567 890</p>
+            </div>
+            <div className="flex flex-col text-background text-end">
+              <a href="#">X</a>
+              <a href="#">Tiktok</a>
+              <a href="#">Instagram</a>
+              <a href="#">Github</a>
+            </div>
+          </div>
+        </div>
       </div>
-      <nav className={`${isOpen ? '-z-40':'z-10' }h-full pt-40`}>
-        <ul className={`flex flex-col text-5xl gap-6 m-4 transition-all ease-in-out duration-1000 ${isOpen ? 'opacity-100':'opacity-0'}`}>
-          <Link className={`w-full text-end transition-all ease-in-out ${isOpen ? 'translate-y-0 duration-1000': '-translate-y-120 duration-300'}`} href={'/'}>About.</Link>
-          <Link className={`w-full text-end  transition-all ease-in-out ${isOpen ? 'translate-y-0 duration-700': '-translate-y-120 duration-500'}`} href={'/'}>Projects.</Link>
-          <Link className={`w-full text-end  transition-all ease-in-out ${isOpen ? 'translate-y-0 duration-500': '-translate-y-120 duration-700'}`} href={'/'}>Skills.</Link>
-          <Link className={`w-full text-end  transition-all ease-in-out ${isOpen ? 'translate-y-0 duration-300': '-translate-y-120 duration-1000'}`} href={'/'}>Contact.</Link>
-        </ul>
-      </nav>
-      </div>)}
-    </header>
+      
+    </div>
   );
 };
 
 export default Header;
+
