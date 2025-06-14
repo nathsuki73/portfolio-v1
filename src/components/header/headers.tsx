@@ -28,10 +28,16 @@ const Header: React.FC = () => {
 
       tl.current = gsap
         .timeline({ paused: true })
+        .to(".menu-underoverlay", {
+          duration: 1,
+          clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+          ease: "power2.inOut",
+        })
         .to(".menu-overlay", {
           duration: 1.25,
           clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
           ease: "power2.inOut",
+          delay: -0.75,
         })
         .to(".item-holder", {
           y: 0,
@@ -66,6 +72,9 @@ const Header: React.FC = () => {
           <HamburgerButton onChange={toggleMenu} />
         </div>
       </div>
+      <div 
+        className="menu-underoverlay fixed top-0 left-0 w-screen h-screen bg-midground-black"
+        style={{clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)"}}>
       <div
         className="menu-overlay fixed top-0 left-0 w-screen h-screen p-8 bg-foreground "
         style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" }}
@@ -95,6 +104,7 @@ const Header: React.FC = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
