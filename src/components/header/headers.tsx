@@ -24,7 +24,7 @@ const Header: React.FC = () => {
 
   useGSAP(
     () => {
-      gsap.set(".item-holder", { y: 100 });
+      gsap.set(".item-holder", { y: "100%" });
 
       tl.current = gsap
         .timeline({ paused: true })
@@ -79,12 +79,12 @@ const Header: React.FC = () => {
         className="menu-overlay fixed top-0 left-0 w-screen h-screen p-8 bg-foreground "
         style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" }}
       >
-        <div className="flex flex-col w-full h-full justify-between">
-          <div className="flex flex-col h-3/4 justify-center items-end gap-6">
+        <div className="flex flex-col w-full h-full justify-between pt-12">
+          <div className="flex flex-col h-3/4 justify-end items-end">
             {MenuLinks.map((link, index) => (
-              <div className="menu-link-item overflow-hidden" key={index}>
-                <div className="item-holder">
-                  <Link className="text-7xl text-background" href={link.path}>
+              <div className="menu-link-item overflow-hidden h-full" key={index}>
+                <div className="item-holder size-full">
+                  <Link className="text-7xl text-background size-full" href={link.path}>
                     {link.label}
                   </Link>
                 </div>
