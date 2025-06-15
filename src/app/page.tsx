@@ -1,8 +1,9 @@
-import Landing from "@/components/landing/landing";
+import Loading from "@/components/loading/loading";
+
 export default function Home() {
   return (
-    <div className="flex flex-col mt-18">
-      <Landing />
+    <div className="">
+      <Loading />
     </div>
   );
 }
