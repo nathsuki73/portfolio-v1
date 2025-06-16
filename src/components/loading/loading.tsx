@@ -1,10 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { SplitText } from "gsap/SplitText";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 const Loading: React.FC = () => {
+    const [isClicked, setClicked] = useState(false);
+
     const tl = useRef<gsap.core.Timeline | null>(null);
     
     useGSAP(() => { 
@@ -68,8 +71,11 @@ const Loading: React.FC = () => {
         tl.current?.play();
     })
 
+    useEffect(() => {
+        
+    }, [isClicked])
     return (
-    <div className='fixed top-0 left-0 h-screen w-screen bg-foreground z-20 text-background flex flex-col justify-between items-center tracking-[20px] text-6xl place-content-evenly'>
+    <Link href={"/home"} onClick={() => setClicked(true)} className='fixed top-0 left-0 h-screen w-screen bg-foreground z-20 text-background flex flex-col justify-between items-center tracking-[20px] text-6xl place-content-evenly'>
         <div className="">
             <h1 className="hover:underline underline-offset-6 cursor-pointer text-xl tracking-normal font-welcome hidden">View Project</h1>
         </div>
@@ -80,7 +86,7 @@ const Loading: React.FC = () => {
         <div className="p-4">
             <h1 className="hover:underline underline-offset-6 cursor-pointer text-xl tracking-normal font-welcome ">click to continue</h1>
         </div>
-    </div>
+    </Link>
   )
 }
 
