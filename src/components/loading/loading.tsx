@@ -1,6 +1,4 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
+import { startTransition, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { SplitText } from "gsap/SplitText";
@@ -18,7 +16,9 @@ const Loading: React.FC = () => {
   };
 
   const Home = () => {
-    router.push("/home");
+    startTransition(() => {
+      router.push("/home");
+    });
   };
 
   useGSAP(() => {
@@ -92,7 +92,7 @@ const Loading: React.FC = () => {
     } else {
       tl.current?.reverse().eventCallback("onReverseComplete", Home);
     }
-  });
+  }, [isLoad]);
 
   return (
     <>
