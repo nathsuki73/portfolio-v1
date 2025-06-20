@@ -4,7 +4,7 @@ import Header from "@/components/header/headers";
 
 
 
-const page = () => {
+const HomePage = () => {
   return (
     <div className="flex flex-col mt-18">
       <Header />
@@ -13,4 +13,4 @@ const page = () => {
   )
 }
 
-export default page
+export default HomePage
