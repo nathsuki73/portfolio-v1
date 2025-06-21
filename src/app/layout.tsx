@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Bodoni_Moda } from "next/font/google";
 import localFont from "next/font/local";
+import ClientWrapper from "@/components/loading/ClientWrapper";
+import Loading from "@/components/loading/loading";
+import { LoadingProvider } from "@/components/loading/LoadingContext";
 
 const welcome_Web = localFont({
   src: "../assets/WelcomewebRegular.woff2",
@@ -27,7 +30,12 @@ export default function RootLayout({
       <body
         className={`antialiased ${bodoni_Moda.className} ${welcome_Web.variable}`}
       >
-        {children}
+        <LoadingProvider>
+          <ClientWrapper>
+            <Loading />
+          </ClientWrapper>
+          {children}
+        </LoadingProvider>
       </body>
     </html>
   );

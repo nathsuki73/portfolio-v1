@@ -1,25 +1,14 @@
-import { startTransition, useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+'use client'
+import { useEffect, useRef } from "react";
 import { SplitText } from "gsap/SplitText";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-const Loading: React.FC = () => {
-  const [isLoad, setLoad] = useState(true);
-  const router = useRouter();
+import { useLoading } from "./LoadingContext";
+const Loading = () => {
+
+  const {isLoading, setIsLoading, href, router} = useLoading();
 
   const tl = useRef<gsap.core.Timeline | null>(null);
-
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    setLoad((prevIsLoad) => !prevIsLoad);
-  };
-
-  const Home = () => {
-    startTransition(() => {
-      router.push("/home");
-    });
-  };
 
   useGSAP(() => {
     gsap.registerPlugin(SplitText);
@@ -51,7 +40,7 @@ const Loading: React.FC = () => {
         duration: 1,
         clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
         ease: "power2.inOut",
-        delay: -0.75,
+        delay: -0.75
       })
       .to(splitItem.chars, {
         y: "-100%",
@@ -81,18 +70,24 @@ const Loading: React.FC = () => {
           from: "random",
         },
         delay: -1,
+        onComplete: () => {
+          setIsLoading(false)
+        }
       });
 
     tl.current = timeline;
   });
 
+
   useEffect(() => {
-    if (isLoad) {
+    if (isLoading) {
       tl.current?.play();
     } else {
-      tl.current?.reverse().eventCallback("onReverseComplete", Home);
+      router.push(href)
+      tl.current?.reverse()
     }
-  }, [isLoad]);
+  }, [isLoading, router, href])
+  
 
   return (
     <>
@@ -100,12 +95,10 @@ const Loading: React.FC = () => {
         className="menu-underoverlay fixed top-0 left-0 w-screen h-screen bg-midground-black"
         style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" }}
       >
-        <Link
-          href={""}
-          onClick={handleClick}
-          className="menu-overlay fixed top-0 left-0 h-screen w-screen bg-foreground z-20 text-background flex flex-col justify-between items-center tracking-[20px] text-6xl place-content-evenly"
+        <div
+          className="menu-overlay fixed top-0 left-0 h-screen w-screen bg-foreground z-20 text-background flex flex-col justify-between items-center tracking-[20px] text-6xl place-content-evenly"        
           style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" }}
-        >
+          >
           <div className="">
             <h1 className="hover:underline underline-offset-6 cursor-pointer text-xl tracking-normal font-welcome hidden">
               View Project
@@ -119,10 +112,9 @@ const Loading: React.FC = () => {
           </div>
           <div className="p-4">
             <h1 className="hover:underline underline-offset-6 cursor-pointer text-xl tracking-normal font-welcome ">
-              click to continue
             </h1>
           </div>
-        </Link>
+        </div>
       </div>
     </>
   );
