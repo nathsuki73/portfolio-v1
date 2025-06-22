@@ -1,12 +1,11 @@
-'use client'
+"use client";
 import { useEffect, useRef } from "react";
 import { SplitText } from "gsap/SplitText";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useLoading } from "./LoadingContext";
 const Loading = () => {
-
-  const {isLoading, setIsLoading, href, router} = useLoading();
+  const { isLoading, setIsLoading, href, router } = useLoading();
 
   const tl = useRef<gsap.core.Timeline | null>(null);
 
@@ -40,7 +39,7 @@ const Loading = () => {
         duration: 1,
         clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
         ease: "power2.inOut",
-        delay: -0.75
+        delay: -0.75,
       })
       .to(splitItem.chars, {
         y: "-100%",
@@ -50,44 +49,23 @@ const Loading = () => {
           amount: 0.5,
           from: "random",
         },
-      })
-      .to(splitItem.chars, {
-        y: "-200%",
-        duration: 1,
-        ease: "power4.inOut",
-        stagger: {
-          amount: 0.5,
-          from: "random",
-        },
-        delay: 1,
-      })
-      .to(splitItemNext.chars, {
-        y: "-200%",
-        duration: 1,
-        ease: "power4.inOut",
-        stagger: {
-          amount: 0.5,
-          from: "random",
+        onComplete: () => {
+          setIsLoading(false);
         },
         delay: -1,
-        onComplete: () => {
-          setIsLoading(false)
-        }
       });
 
     tl.current = timeline;
   });
 
-
   useEffect(() => {
     if (isLoading) {
       tl.current?.play();
     } else {
-      router.push(href)
-      tl.current?.reverse()
+      router.push(href);
+      tl.current?.reverse();
     }
-  }, [isLoading, router, href])
-  
+  }, [isLoading, router, href]);
 
   return (
     <>
@@ -96,9 +74,9 @@ const Loading = () => {
         style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" }}
       >
         <div
-          className="menu-overlay fixed top-0 left-0 h-screen w-screen bg-foreground z-20 text-background flex flex-col justify-between items-center tracking-[20px] text-6xl place-content-evenly"        
+          className="menu-overlay fixed top-0 left-0 h-screen w-screen bg-foreground z-20 text-background flex flex-col justify-between items-center tracking-[20px] text-6xl place-content-evenly"
           style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" }}
-          >
+        >
           <div className="">
             <h1 className="hover:underline underline-offset-6 cursor-pointer text-xl tracking-normal font-welcome hidden">
               View Project
@@ -108,11 +86,9 @@ const Loading = () => {
             <h1 className="item" style={{ opacity: 0 }}>
               NATHANIEL
             </h1>
-            <h1 className="item-next">TAN</h1>
           </div>
           <div className="p-4">
-            <h1 className="hover:underline underline-offset-6 cursor-pointer text-xl tracking-normal font-welcome ">
-            </h1>
+            <h1 className="hover:underline underline-offset-6 cursor-pointer text-xl tracking-normal font-welcome "></h1>
           </div>
         </div>
       </div>
