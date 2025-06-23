@@ -66,7 +66,7 @@ const Header: React.FC = () => {
             isOpen ? "text-background" : "text-foreground"
           }`}
         >
-          <Link href="/">TAN</Link>
+          <Link href="/" className="font-bodoni-moda">TAN</Link>
         </div>
         <div>
           <HamburgerButton onChange={toggleMenu} />

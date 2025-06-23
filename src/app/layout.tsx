@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Bodoni_Moda } from "next/font/google";
+import { Bodoni_Moda, Inter } from "next/font/google";
 import localFont from "next/font/local";
 import ClientWrapper from "@/components/loading/ClientWrapper";
 import Loading from "@/components/loading/loading";
@@ -12,6 +12,10 @@ const welcome_Web = localFont({
 });
 
 const bodoni_Moda = Bodoni_Moda({
+  subsets: ["latin"],
+  variable: "--font-bodoni-moda",
+});
+const inter = Inter({
   subsets: ["latin"],
 });
 
@@ -28,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased ${bodoni_Moda.className} ${welcome_Web.variable}`}
+        className={`antialiased ${inter.className} ${bodoni_Moda.variable} ${welcome_Web.variable}`}
       >
         <LoadingProvider>
           <ClientWrapper>

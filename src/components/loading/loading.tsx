@@ -24,10 +24,6 @@ const Loading = () => {
       type: "chars",
       charsClass: "char++",
     });
-    const splitItemNext = SplitText.create(".item-next", {
-      type: "chars",
-      charsClass: "char++",
-    });
 
     timeline
       .to(".menu-underoverlay", {

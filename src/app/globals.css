@@ -14,6 +14,7 @@
   --color-midground-white: var(--midground-white);
   --color-foreground: var(--foreground);
   --font-welcome: var(--font-welcome);
+  --font-bodoni-moda: var(--font-bodoni-moda);
 }
 
 @media (prefers-color-scheme: dark) {
