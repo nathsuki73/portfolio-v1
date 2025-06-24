@@ -20,7 +20,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Tan",
+  icons: {
+    icon:  "/svg/icon.svg",
+  },
+  title: "Nat",
   description: "Portfolio Version 3",
 };
 
@@ -32,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased ${inter.className} ${bodoni_Moda.variable} ${welcome_Web.variable}`}
+        className={`antialiased ${inter.className} ${bodoni_Moda.variable} ${welcome_Web.variable} mx-4 sm:mx-6 md:10 lg:mx-16 xl:mx-24 2xl:mx-32`}
       >
         <LoadingProvider>
           <ClientWrapper>

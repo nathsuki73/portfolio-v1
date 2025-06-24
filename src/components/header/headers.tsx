@@ -5,6 +5,8 @@ import Link from "next/link";
 import HamburgerButton from "./hamburger-button";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import Image from "next/image";
+
 const Header: React.FC = () => {
   const MenuLinks = [
     { path: "#about", label: "About" },
@@ -66,7 +68,9 @@ const Header: React.FC = () => {
             isOpen ? "text-background" : "text-foreground"
           }`}
         >
-          <Link href="/" className="font-bodoni-moda">TAN</Link>
+          <Link href="/" className="" >
+            <Image src="/svg/icon.svg" alt="NAT logo" width={40} height={40}/>
+          </Link>
         </div>
         <div>
           <HamburgerButton onChange={toggleMenu} />
