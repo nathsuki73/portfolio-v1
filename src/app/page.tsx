@@ -1,6 +1,7 @@
 'use client'
 import Link from "next/link";
 import Image from "next/image";
+import TransitionLink from "@/components/TransitionLink/transitionLink";
 
 export default function Home() {
   return (
@@ -18,7 +19,29 @@ export default function Home() {
             <a href="#">TT</a>
             <a href="#">IG</a>
           </div>
-          {/* <TransitionLink path="/about" label="About Me" className="h-9 border-1 px-4" /> */}
+        </div>
+      </div>
+      <div className="flex flex-col mt-40 ">
+        <div className="items-center text-center text-6xl font-bold tracking-tighter">
+          <h1>
+            Crafting <span>Modern</span> Web
+          </h1>
+          <h1>
+            <span>Experiences</span> and Interactive <span>Solutions</span>
+          </h1>
+        </div>
+        <div className="items-center text-center text-2xl font-medium tracking-tighter my-8">
+          Crafting elegance and innovation in every line of code.
+        </div>
+        <div className="flex flex-row gap-1.5 justify-center">
+          <TransitionLink path="/about" label="Get in Touch" className="h-9 border-1 px-4" />
+          <TransitionLink path="/about" label="View my work" className="h-9 border-1 px-4" />
+        </div>
+        <div>
+          
+        </div>
+        <div className="self-center ">
+          <Image src={'/svg/arrow-down.svg'} alt="Scroll to continue" width={50} height={50}/>
         </div>
       </div>
     </div>
