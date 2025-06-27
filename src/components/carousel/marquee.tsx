@@ -35,12 +35,12 @@ const Marquee = () => {
     }, [])
 
     const [isHovered, setHovered] = useState(false)
-    const [isxPercent, setxPrecent] = useState(0)
+    const xPercentRef = useRef(0)
     
     
     
     useEffect(() => {
-        let xPercent = isxPercent
+        let xPercent = xPercentRef.current
         
         const direction = -1
         const animation = () => {
@@ -50,18 +50,18 @@ const Marquee = () => {
             gsap.set(firstDiv.current, {xPercent: xPercent})
             gsap.set(secondDiv.current, {xPercent: xPercent})
             xPercent += (isHovered ? 0.05:0.1) * direction;
-            setxPrecent(xPercent)
+            xPercentRef.current = xPercent
             requestAnimationFrame(animation)
         }
 
         requestAnimationFrame(animation)
-    }, [isHovered, isxPercent])
+    }, [isHovered])
 
     
 
 
   return (
-    <div className='w-full overflow-hidden z-0' >
+    <div className='w-full overflow-hidden z-0' style={{maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)'}}>
         <div className='flex' ref={containerDiv} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
             <div className='flex flex-row w-fit justify-start' ref={firstDiv}>
                 {ELEMENTS.map((src: string, index: number) => {
