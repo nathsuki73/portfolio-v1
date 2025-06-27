@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import Image from 'next/image'
 
@@ -24,7 +24,7 @@ const Marquee = () => {
         const widthTotal = () => {
             if (firstDiv.current && secondDiv.current) {
                 const style = getComputedStyle(firstDiv.current?.children[0])
-                const marginRight = parseFloat(style.marginRight)
+                const marginRight = 2 * parseFloat(style.marginRight)
                 return firstDiv.current?.scrollWidth + secondDiv.current?.scrollWidth + marginRight
             }
         }
@@ -34,37 +34,46 @@ const Marquee = () => {
         })
     }, [])
 
-    let xPercent = 0
-    const direction = -1
+    const [isHovered, setHovered] = useState(false)
+    const [isxPercent, setxPrecent] = useState(0)
+    
+    
+    
+    useEffect(() => {
+        let xPercent = isxPercent
+        
+        const direction = -1
+        const animation = () => {
+            if (xPercent <= -100) {
+                xPercent = 0
+            }
+            gsap.set(firstDiv.current, {xPercent: xPercent})
+            gsap.set(secondDiv.current, {xPercent: xPercent})
+            xPercent += (isHovered ? 0.05:0.1) * direction;
+            setxPrecent(xPercent)
+            requestAnimationFrame(animation)
+        }
+
+        requestAnimationFrame(animation)
+    }, [isHovered, isxPercent])
+
     
 
-    const animation = () => {
-        if (xPercent <= -100) {
-            xPercent = 0
-        }
-        gsap.set(firstDiv.current, {xPercent: xPercent})
-        gsap.set(secondDiv.current, {xPercent: xPercent})
-        xPercent += 0.1 * direction;
-        requestAnimationFrame(animation)
-    }
-     
-    useEffect(() => {
-        requestAnimationFrame(animation)
-    }, [])
+
   return (
-    <div className='w-full overflow-hidden'>
-        <div className='flex' ref={containerDiv} >
+    <div className='w-full overflow-hidden' >
+        <div className='flex' ref={containerDiv} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
             <div className='flex flex-row w-fit justify-start' ref={firstDiv}>
                 {ELEMENTS.map((src: string, index: number) => {
                     return (
-                        <Image key={index} src={src} alt='tech-icon' width={50} height={50} className='mr-10'/>
+                        <Image key={index} src={src} alt='tech-icon' width={50} height={50} className='mr-20'/>
                     )
                 })}
             </div>
             <div className='flex flex-row w-fit justify-start' ref={secondDiv} >
                 {ELEMENTS.map((src: string, index: number) => {
                     return (
-                        <Image key={index} src={src} alt='tech-icon' width={50} height={50}  className='mr-10' />
+                        <Image key={index} src={src} alt='tech-icon' width={50} height={50}  className='mr-20' />
                     )
                 })}
             </div>

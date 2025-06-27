@@ -42,7 +42,7 @@ export default function Home() {
 
         </div>
         
-        <div className="h-16 w-full">
+        <div className="h-16 w-full  -z-50">
           <Marquee />
         </div>
         <div className="self-center">
