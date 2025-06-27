@@ -23,12 +23,9 @@ const Marquee = () => {
     useEffect(() => {
         const widthTotal = () => {
             if (firstDiv.current && secondDiv.current) {
-                const style = getComputedStyle(firstDiv.current?.children[0])
-                const marginRight = 2 * parseFloat(style.marginRight)
-                return firstDiv.current?.scrollWidth + secondDiv.current?.scrollWidth + marginRight
+                return firstDiv.current?.clientWidth + secondDiv.current?.clientWidth
             }
         }
-        console.log(widthTotal())
         gsap.set(containerDiv.current, {
             width: widthTotal()
         })
@@ -49,7 +46,7 @@ const Marquee = () => {
             }
             gsap.set(firstDiv.current, {xPercent: xPercent})
             gsap.set(secondDiv.current, {xPercent: xPercent})
-            xPercent += (isHovered ? 0.05:0.1) * direction;
+            xPercent += (isHovered ? 0.05:0.8) * direction;
             xPercentRef.current = xPercent
             requestAnimationFrame(animation)
         }
@@ -62,7 +59,7 @@ const Marquee = () => {
 
   return (
     <div className='w-full overflow-hidden z-0' style={{maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)'}}>
-        <div className='flex' ref={containerDiv} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+        <div className='flex w-[5000px]' ref={containerDiv} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
             <div className='flex flex-row w-fit justify-start' ref={firstDiv}>
                 {ELEMENTS.map((src: string, index: number) => {
                     return (
