@@ -13,11 +13,26 @@ const typescriptIcon = '/svg/tech-stack-icon/typescript.svg'
 
 const ICONS: string[] = [gsapIcon, laravelIcon, mysqlIcon, nextJsIcon, reactIcon, tailwindIcon, typescriptIcon]
 
-const ELEMENTS = [...ICONS, ...ICONS, ...ICONS]
+const ELEMENTS = [...ICONS, ...ICONS]
 
 const Marquee = () => {
-    const firstDiv = useRef(null)
-    const secondDiv = useRef(null)
+    const firstDiv = useRef<HTMLDivElement | null>(null)
+    const secondDiv = useRef<HTMLDivElement | null>(null)
+    const containerDiv = useRef<HTMLDivElement | null>(null)
+    
+    useEffect(() => {
+        const widthTotal = () => {
+            if (firstDiv.current && secondDiv.current) {
+                const style = getComputedStyle(firstDiv.current?.children[0])
+                const marginRight = parseFloat(style.marginRight)
+                return firstDiv.current?.scrollWidth + secondDiv.current?.scrollWidth + marginRight
+            }
+        }
+        console.log(widthTotal())
+        gsap.set(containerDiv.current, {
+            width: widthTotal()
+        })
+    }, [])
 
     let xPercent = 0
     const direction = -1
@@ -38,18 +53,18 @@ const Marquee = () => {
     }, [])
   return (
     <div className='w-full overflow-hidden'>
-        <div className='flex w-full relative'>
-            <div className='flex flex-row w-full justify-between m-0' ref={firstDiv}>
+        <div className='flex' ref={containerDiv} >
+            <div className='flex flex-row w-fit justify-start' ref={firstDiv}>
                 {ELEMENTS.map((src: string, index: number) => {
                     return (
-                        <Image key={index} src={src} alt='icon' width={50} height={50} />
+                        <Image key={index} src={src} alt='tech-icon' width={50} height={50} className='mr-10'/>
                     )
                 })}
             </div>
-            <div className='flex flex-row w-full absolute left-full justify-between m-0' ref={secondDiv}>
+            <div className='flex flex-row w-fit justify-start' ref={secondDiv} >
                 {ELEMENTS.map((src: string, index: number) => {
                     return (
-                        <Image key={index} src={src} alt='icon' width={50} height={50} />
+                        <Image key={index} src={src} alt='tech-icon' width={50} height={50}  className='mr-10' />
                     )
                 })}
             </div>
