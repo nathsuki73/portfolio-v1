@@ -6,7 +6,7 @@ import Marquee from "@/components/carousel/marquee";
 
 export default function Home() {
   return (
-    <div className="flex flex-col mt-36">
+    <div className="flex flex-col mt-36 ">
       <div className="fixed left-0 top-0 w-full p-8 flex justify-between items-center">
         <div className="md:mx-16">
           <Link href="/home" className="" >
@@ -42,7 +42,7 @@ export default function Home() {
 
         </div>
         
-        <div className="h-16 w-full  -z-50">
+        <div className="h-16 w-full">
           <Marquee />
         </div>
         <div className="self-center">

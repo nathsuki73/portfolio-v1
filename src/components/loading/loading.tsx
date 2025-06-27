@@ -66,11 +66,11 @@ const Loading = () => {
   return (
     <>
       <div
-        className="menu-underoverlay fixed top-0 left-0 w-screen h-screen bg-midground-black"
+        className="menu-underoverlay fixed top-0 left-0 w-screen h-screen bg-midground-black z-40"
         style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" }}
       >
         <div
-          className="menu-overlay fixed top-0 left-0 h-screen w-screen bg-foreground z-20 text-background flex flex-col justify-between items-center tracking-[20px] text-6xl place-content-evenly"
+          className="menu-overlay fixed top-0 left-0 h-screen w-screen bg-foreground z-50 text-background flex flex-col justify-between items-center tracking-[20px] text-6xl place-content-evenly"
           style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" }}
         >
           <div className="">

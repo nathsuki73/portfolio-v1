@@ -61,7 +61,7 @@ const Marquee = () => {
 
 
   return (
-    <div className='w-full overflow-hidden' >
+    <div className='w-full overflow-hidden z-0' >
         <div className='flex' ref={containerDiv} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
             <div className='flex flex-row w-fit justify-start' ref={firstDiv}>
                 {ELEMENTS.map((src: string, index: number) => {
