@@ -2,17 +2,17 @@
 
 import { usePathname } from "next/navigation"
 import { useLoading } from "../loading/LoadingContext"
-import { useEffect } from "react"
 
 interface TransitionLinkProps {
     path: string
-    label: string
+    children: React.ReactNode
     className: string
+    style?: React.CSSProperties | undefined
 }
 
-const TransitionLink = ({path, label, className}: TransitionLinkProps) => {
+const TransitionLink = ({path, children, className, style,}: TransitionLinkProps) => {
     const pathName = usePathname();
-    const {setIsLoading, setHref, href, isLoading} = useLoading();
+    const {setIsLoading, setHref, } = useLoading();
     
     const handleClick = () => {
         if (pathName !== path) {
@@ -20,21 +20,13 @@ const TransitionLink = ({path, label, className}: TransitionLinkProps) => {
             setIsLoading(true)
         }
     }
-
-    useEffect(() => {
-        console.log("isLoading changed to:", isLoading);
-      }, [isLoading]);
-      
-      useEffect(() => {
-        console.log("href changed to:", href);
-      }, [href]);
       
 
   return (
     <button 
     className={className}
-    onClick={handleClick}>
-        {label}
+    onClick={handleClick} style={style}>
+        {children}
     </button>
   )
 }

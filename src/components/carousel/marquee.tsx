@@ -46,7 +46,7 @@ const Marquee = () => {
             }
             gsap.set(firstDiv.current, {xPercent: xPercent})
             gsap.set(secondDiv.current, {xPercent: xPercent})
-            xPercent += (isHovered ? 0.05:0.8) * direction;
+            xPercent += (isHovered ? 0.05:0.1) * direction;
             xPercentRef.current = xPercent
             requestAnimationFrame(animation)
         }

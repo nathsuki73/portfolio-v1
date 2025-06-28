@@ -3,8 +3,43 @@ import Link from "next/link";
 import Image from "next/image";
 import TransitionLink from "@/components/TransitionLink/transitionLink";
 import Marquee from "@/components/carousel/marquee";
+import gsap from "gsap";
+import { useEffect, useRef, useState } from "react";
+import { useGSAP } from "@gsap/react";
 
 export default function Home() {
+  const [isHovered, setHovered] = useState(false)
+  const [hoveredDiv, setHoveredDiv] = useState<Element | null>(null);
+
+  const tl = useRef<gsap.core.Timeline | null>(null);
+  
+  const setDiv = (e: React.MouseEvent<HTMLDivElement>) => {
+      const child = e.currentTarget.children[0]
+      setHoveredDiv(child)
+      setHovered(true)
+  }
+  
+  const resetDiv = () => {
+      setHovered(false)
+  }
+
+
+  useGSAP(() => {
+    tl.current = gsap.timeline().to(hoveredDiv, {
+      duration: 1,
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      ease: "power2.inOut"
+    })
+  }, [hoveredDiv])
+  
+  useEffect(() => {
+    if (isHovered) {
+      tl.current?.play()
+    } else {
+      tl.current?.reverse()
+    }
+  }, [isHovered, tl])
+
   return (
     <div className="flex flex-col mt-36 ">
       <div className="fixed left-0 top-0 w-full p-8 flex justify-between items-center">
@@ -35,9 +70,28 @@ export default function Home() {
           <div className="items-center text-center text-2xl font-medium tracking-tighter">
             Crafting elegance and innovation in every line of code.
           </div>
-          <div className="flex flex-row gap-1.5 justify-center">
-            <TransitionLink path="/about" label="Get in Touch" className="h-9 border-1 px-4" />
-            <TransitionLink path="/about" label="View my work" className="h-9 border-1 px-4" />
+          <div className="flex flex-row gap-1.5 justify-center">  
+            <div className="relative h-9 w-36 border-1 " 
+                onMouseEnter={setDiv}
+                onMouseLeave={resetDiv}>
+              <TransitionLink path="/about"  className="overlay-button1 absolute size-full z-10 top-0 left-0 px-4 hover:cursor-pointer bg-foreground text-background" style={{clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)"}}>
+                Get in Touch
+              </TransitionLink>
+              <TransitionLink path="/about"  className="absolute size-full z-0 top-0 left-0 px-4 hover:cursor-pointer">
+                Get in Touch
+              </TransitionLink>
+            </div>
+            <div className="relative h-9 w-36 border-1 " 
+                onMouseEnter={setDiv}
+                onMouseLeave={resetDiv}>
+              <TransitionLink path="/about"  className="overlay-button2 absolute size-full z-10 top-0 left-0 px-4 hover:cursor-pointer bg-foreground text-background" style={{clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)"}}>
+                View my Work
+              </TransitionLink>
+              <TransitionLink path="/about"  className="absolute size-full z-0 top-0 left-0 px-4 hover:cursor-pointer">
+                Get in Work
+              </TransitionLink>
+            </div>
+            
           </div>
 
         </div>
