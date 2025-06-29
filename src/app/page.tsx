@@ -71,23 +71,23 @@ export default function Home() {
             Crafting elegance and innovation in every line of code.
           </div>
           <div className="flex flex-row gap-1.5 justify-center">  
-            <div className="relative h-9 w-36 border-1 " 
+            <div className="relative h-9 w-36" 
                 onMouseEnter={setDiv}
                 onMouseLeave={resetDiv}>
-              <TransitionLink path="/about"  className="overlay-button1 absolute size-full z-10 top-0 left-0 px-4 hover:cursor-pointer bg-foreground text-background" style={{clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)"}}>
+              <TransitionLink path="/about"  className="overlay-button1 absolute size-full z-10 top-0 left-0 px-4 hover:cursor-pointer bg-foreground text-background border-foreground border-1 " style={{clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)"}}>
                 Get in Touch
               </TransitionLink>
-              <TransitionLink path="/about"  className="absolute size-full z-0 top-0 left-0 px-4 hover:cursor-pointer">
+              <TransitionLink path="/about"  className="absolute size-full z-0 top-0 left-0 px-4 hover:cursor-pointer border-1">
                 Get in Touch
               </TransitionLink>
             </div>
-            <div className="relative h-9 w-36 border-1 " 
+            <div className="relative h-9 w-36" 
                 onMouseEnter={setDiv}
                 onMouseLeave={resetDiv}>
-              <TransitionLink path="/about"  className="overlay-button2 absolute size-full z-10 top-0 left-0 px-4 hover:cursor-pointer bg-foreground text-background" style={{clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)"}}>
+              <TransitionLink path="/about"  className="overlay-button2 absolute size-full z-10 top-0 left-0 px-4 hover:cursor-pointer bg-foreground text-background border-foreground border-1" style={{clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)"}}>
                 View my Work
               </TransitionLink>
-              <TransitionLink path="/about"  className="absolute size-full z-0 top-0 left-0 px-4 hover:cursor-pointer">
+              <TransitionLink path="/about"  className="absolute size-full z-0 top-0 left-0 px-4 hover:cursor-pointer border-1">
                 Get in Work
               </TransitionLink>
             </div>
