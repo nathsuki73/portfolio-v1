@@ -9,27 +9,36 @@ import { useGSAP } from "@gsap/react";
 
 export default function Home() {
   const [isHovered, setHovered] = useState(false)
-  const [hoveredDiv, setHoveredDiv] = useState<Element | null>(null);
+  const [isHovered2, setHovered2] = useState(false)
+
+  const hoveredDiv = useRef<HTMLDivElement | null>(null)
+  const hoveredDiv2 = useRef<HTMLDivElement | null>(null)
 
   const tl = useRef<gsap.core.Timeline | null>(null);
+  const tl2 = useRef<gsap.core.Timeline | null>(null);
   
-  const setDiv = (e: React.MouseEvent<HTMLDivElement>) => {
-      const child = e.currentTarget.children[0]
-      setHoveredDiv(child)
-      setHovered(true)
-  }
   
-  const resetDiv = () => {
-      setHovered(false)
-  }
 
 
   useGSAP(() => {
-    tl.current = gsap.timeline().to(hoveredDiv, {
+    const div1 = hoveredDiv.current?.firstElementChild
+    if (!div1) return
+    const div2 = hoveredDiv2.current?.firstElementChild
+    if (!div2) return
+
+    tl.current = gsap.timeline().to(div1, {
       duration: 1,
       clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-      ease: "power2.inOut"
+      ease: "power4.inOut"
     })
+    tl2.current = gsap.timeline().to(div2, {
+      duration: 1,
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      ease: "power4.inOut"
+    })
+
+    tl.current?.pause()
+    tl2.current?.pause()
   }, [hoveredDiv])
   
   useEffect(() => {
@@ -38,10 +47,21 @@ export default function Home() {
     } else {
       tl.current?.reverse()
     }
-  }, [isHovered, tl])
 
+  
+  }, [isHovered, tl])
+  
+  useEffect(() => {
+    if (isHovered2) {
+      tl2.current?.play()
+    } else {
+      tl2.current?.reverse()
+    }
+
+  
+  }, [isHovered2, tl2])
   return (
-    <div className="flex flex-col mt-36 ">
+    <div className="flex flex-col">
       <div className="fixed left-0 top-0 w-full p-8 flex justify-between items-center">
         <div className="md:mx-16">
           <Link href="/home" className="" >
@@ -71,24 +91,26 @@ export default function Home() {
             Crafting elegance and innovation in every line of code.
           </div>
           <div className="flex flex-row gap-1.5 justify-center">  
-            <div className="relative h-9 w-36" 
-                onMouseEnter={setDiv}
-                onMouseLeave={resetDiv}>
-              <TransitionLink path="/about"  className="overlay-button1 absolute size-full z-10 top-0 left-0 px-4 hover:cursor-pointer bg-foreground text-background border-foreground border-1 " style={{clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)"}}>
-                Get in Touch
-              </TransitionLink>
-              <TransitionLink path="/about"  className="absolute size-full z-0 top-0 left-0 px-4 hover:cursor-pointer border-1">
-                Get in Touch
-              </TransitionLink>
-            </div>
-            <div className="relative h-9 w-36" 
-                onMouseEnter={setDiv}
-                onMouseLeave={resetDiv}>
-              <TransitionLink path="/about"  className="overlay-button2 absolute size-full z-10 top-0 left-0 px-4 hover:cursor-pointer bg-foreground text-background border-foreground border-1" style={{clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)"}}>
+            <div className="overlay-button1 relative h-9 w-36" 
+                ref={hoveredDiv}
+                onMouseEnter={() => setHovered(true)}
+                onMouseLeave={() => setHovered(false)}>
+              <TransitionLink path="/about"  className="absolute size-full z-10 top-0 left-0 px-4 hover:cursor-pointer bg-foreground text-background border-foreground border-1" style={{clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)"}}>
                 View my Work
               </TransitionLink>
               <TransitionLink path="/about"  className="absolute size-full z-0 top-0 left-0 px-4 hover:cursor-pointer border-1">
-                Get in Work
+                View my Work
+              </TransitionLink>
+            </div>
+            <div className="overlay-button2  relative h-9 w-36"
+                ref={hoveredDiv2} 
+                onMouseEnter={() => setHovered2(true)}
+                onMouseLeave={() => setHovered2(false)}>
+              <TransitionLink path="/about"  className="absolute size-full z-10 top-0 left-0 px-4 hover:cursor-pointer bg-foreground text-background border-foreground border-1 " style={{clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)"}}>
+                Get in Touch
+              </TransitionLink>
+              <TransitionLink path="/about"  className="absolute size-full z-0 top-0 left-0 px-4 hover:cursor-pointer border-1">
+                Get in Touch
               </TransitionLink>
             </div>
             
@@ -96,7 +118,7 @@ export default function Home() {
 
         </div>
         
-        <div className="h-16 w-full">
+        <div className="h-12 w-full">
           <Marquee />
         </div>
         <div className="self-center">
