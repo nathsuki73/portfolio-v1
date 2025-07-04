@@ -28,7 +28,7 @@ export default function Home() {
 
     tl.current = gsap.timeline().to(div1, {
       duration: 1,
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
       ease: "power4.inOut"
     })
     tl2.current = gsap.timeline().to(div2, {
@@ -95,7 +95,7 @@ export default function Home() {
                 ref={hoveredDiv}
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}>
-              <TransitionLink path="/about"  className="absolute size-full z-10 top-0 left-0 px-4 hover:cursor-pointer bg-foreground text-background border-foreground border-1" style={{clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)"}}>
+              <TransitionLink path="/about"  className="absolute size-full z-10 top-0 left-0 px-4 hover:cursor-pointer bg-foreground text-background border-foreground border-1" style={{clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)"}}>
                 View my Work
               </TransitionLink>
               <TransitionLink path="/about"  className="absolute size-full z-0 top-0 left-0 px-4 hover:cursor-pointer border-1">
