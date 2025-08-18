@@ -79,7 +79,7 @@ export default function Home() {
       </div>
       <div className="flex flex-col justify-between h-full mt-36 mb-12 gap-16">
         <div className="flex flex-col gap-4">
-          <div className="items-center text-center text-6xl font-bold tracking-tighter">
+          <div className="items-center text-center text-4xl sm:text-6xl font-bold tracking-tighter">
             <h1>
               Crafting <span>Modern</span> Web
             </h1>
@@ -87,7 +87,7 @@ export default function Home() {
               <span>Experiences</span> and Interactive <span>Solutions</span>
             </h1>
           </div>
-          <div className="items-center text-center text-2xl font-medium tracking-tighter">
+          <div className="items-center text-center text-xl sm:text-2xl  font-medium tracking-tighter">
             Crafting elegance and innovation in every line of code.
           </div>
           <div className="flex flex-row gap-1.5 justify-center">  
