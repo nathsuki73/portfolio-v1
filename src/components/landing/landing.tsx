@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 const Landing = () => {
   return (
@@ -29,16 +28,6 @@ const Landing = () => {
             My Works
           </Link>
         </div>
-      </div>
-
-      <div className="h-[300px] sm:h-[430px] overflow-hidden border-1">
-        <Image
-          className="w-full"
-          src="/img/picture1.jpg"
-          alt="picture"
-          width={300}
-          height={300}
-        ></Image>
       </div>
     </section>
   );
