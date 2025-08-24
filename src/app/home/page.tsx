@@ -6,9 +6,9 @@ import Header from "@/components/header/headers";
 
 const HomePage = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-screen">
       <Header />
-      <Landing />
+        <Landing />
     </div>
   )
 }

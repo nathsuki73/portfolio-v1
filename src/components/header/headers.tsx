@@ -62,9 +62,9 @@ const Header: React.FC = () => {
 
   return (
     <div className="menu-container" ref={container}>
-      <div className="fixed left-0 top-0 w-full p-8 flex justify-between items-center z-10">
+      <div className="fixed left-0 top-0 w-full px-2 sm:p-8 flex justify-between items-center z-10">
         <div
-          className={`menu-logo transition-all ease-in-out md:px-16 ${
+          className={`menu-logo transition-all ease-in-out md:px-4 ${
             isOpen ? "text-background" : "text-foreground"
           }`}
         >
