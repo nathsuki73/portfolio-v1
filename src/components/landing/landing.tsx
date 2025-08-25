@@ -3,7 +3,7 @@ import Link from "next/link";
 const Landing = () => {
   return (
     <section
-      className={`flex w-full h-full flex-row overflow-hidden gap-4 sm:p-12 `}
+      className={`flex w-full h-screen flex-row overflow-hidden gap-4 sm:p-12 `}
     >
       <div className="flex flex-col md:w-2/3 lg:w-1/2 justify-center ">
         <h1 className="font-bold text-5xl sm:text-6xl">
