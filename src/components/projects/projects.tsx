@@ -12,15 +12,22 @@ interface ProjectsProps {
 
 const Projects = () => {
   return (
-    <section className='flex flex-col bg-amber-700'>
-        <div className='flex justify-between p-4'>
-            <h1 className='text-4xl'>Featured Projects</h1>
-            <Link href={"/"}>View all</Link>
+    <section className='flex flex-col items-center'>
+        <div className='flex p-5 w-full'>
+            <h1 className='font-bold text-3xl '>Featured Projects</h1>
         </div>
         <Card 
         image='https://i.pinimg.com/1200x/b0/54/5d/b0545d16d764012ca5b4763740ef0fda.jpg'
-        title='Title'
-        date='date'></Card>
+        title='Long AI-Powered Web Project Study: Exploring Deep Learning Applications in Modern Web Development'
+        date='June 2024'></Card>
+        <Card 
+        image='https://i.pinimg.com/1200x/b0/54/5d/b0545d16d764012ca5b4763740ef0fda.jpg'
+        title='Long AI-Powered Web Project Study: Exploring Deep Learning Applications in Modern Web Development'
+        date='June 2024'></Card>
+        <Card 
+        image='https://i.pinimg.com/1200x/b0/54/5d/b0545d16d764012ca5b4763740ef0fda.jpg'
+        title='Long AI-Powered Web Project Study: Exploring Deep Learning Applications in Modern Web Development'
+        date='June 2024'></Card>
     </section>
   )
 }
@@ -28,15 +35,17 @@ const Projects = () => {
 const Card = ({image, title, date}: ProjectsProps) => {
 
     return (
-        <div className='grid border-t-2 p-4 gap-4'>
+        <div className='grid grid-cols-1 sm:grid-cols-3 border-t-2 p-4 gap-4 '>
             <Image 
                 alt='image-1' 
                 src={image}
-                width={300}
-                height={200}
+                width={400}
+                height={300}
              ></Image>
-             <h1 className='text-4xl'>{title}</h1>
-             <h6>{date}</h6>
+             <div className='col-span-2'>
+                <h1 className='text-3xl'>{title}</h1>
+                <h6>{date}</h6>
+             </div>
         </div>
     )
 }
