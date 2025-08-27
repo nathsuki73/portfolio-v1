@@ -12,7 +12,7 @@ interface ProjectsProps {
 
 const Projects = () => {
   return (
-    <section className='flex flex-col items-center'>
+    <section className='flex flex-col items-center my-24'>
         <div className='flex p-5 w-full'>
             <h1 className='font-bold text-3xl '>Featured Projects</h1>
         </div>
