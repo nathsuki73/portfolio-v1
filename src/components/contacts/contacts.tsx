@@ -9,14 +9,14 @@ interface TextBoxProps {
 const Contacts = () => {
   return (
     <section className='w-full my-24 flex flex-col md:flex-row gap-4'>
-            <div className='flex-col md:w-1/2 text-8xl lg:text-9xl md:flex font-welcome'>
+            <div className='flex-col md:w-1/2 text-7xl lg:text-9xl md:flex font-welcome'>
               <h1 className=''>
                 LET&apos;S
               </h1>
-              <h1 className='self-end lg:self-center'>
+              <h1 className='text-center md:text-right lg:self-center'>
                 GET IN
               </h1>
-              <h1 className=''>
+              <h1 className='text-right lg:text-left'>
                 TOUCH
               </h1>
             </div>
