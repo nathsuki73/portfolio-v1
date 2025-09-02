@@ -38,10 +38,10 @@ const Contacts = () => {
 
 const TextBox = ({name, type = 'text'}: TextBoxProps) => {
   return (
-    <div className="flex flex-col-reverse w-full mx-auto overflow-hidden">
+    <div className="flex flex-col-reverse w-full mx-auto overflow-hidden ">
         <input
           placeholder={name}
-          className="relative h-12 px-4 py-1 text-md border-b-1 focus:border-b-2 outline-none peer placeholder:duration-500 placeholder:absolute focus:placeholder:pt-10 placeholder:text-base-400"
+          className="h-12 px-4 py-1 text-md border-b-1 focus:border-b-2 outline-none peer placeholder:duration-500 focus:placeholder:translate-y-12 placeholder:text-base-400"
           type={type}
           id={name}
         />
