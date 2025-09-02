@@ -8,10 +8,19 @@ interface TextBoxProps {
 
 const Contacts = () => {
   return (
-    <div className='w-full my-24'>
-        <h1 className='text-3xl font-bold p-5'>Contact Me.</h1>
-        <div className='grid grid-cols-1 gap-4'>
-            <form className='flex flex-col w-full'>
+    <section className='w-full my-24 flex flex-col md:flex-row gap-4'>
+            <div className='flex-col md:w-1/2 text-8xl lg:text-9xl md:flex font-welcome'>
+              <h1 className=''>
+                LET&apos;S
+              </h1>
+              <h1 className='self-end lg:self-center'>
+                GET IN
+              </h1>
+              <h1 className=''>
+                TOUCH
+              </h1>
+            </div>
+            <form className='flex flex-col w-full md:w-1/2'>
               <TextBox name='Full Name' ></TextBox>
               <TextBox name='Email Address' type='email'></TextBox>
               <TextBox name='Phone' type='tel'></TextBox>
@@ -23,8 +32,7 @@ const Contacts = () => {
                 Submit
               </Link>
             </form>
-        </div>
-    </div>
+    </section>
   )
 }
 
